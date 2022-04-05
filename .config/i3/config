@@ -251,7 +251,7 @@ bindsym --release $mod+F5 exec --no-startup-id playerctl play-pause
 bindsym --release $mod+F6 exec --no-startup-id playerctl next
 
 # screen saver button
-bindsym --release $mod+F8 exec nemo
+bindsym --release $mod+F8 exec arandr
 
 # search button (magnifying glass)
 bindsym --release $mod+F9 exec firefox
