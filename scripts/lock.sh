@@ -36,7 +36,7 @@ i3lock \
 --no-modkey-text \
 --lock-text="sorry, you're gonna have to wait" \
 --lockfailed-text='almost there...' \
-\ #--greeter-text="$(fortune -s fortunes | tr '\n' ' ')" \
+--greeter-text="$(fortune -s fortunes | tr '\n' ' ')" \
 \
 --time-font=Ubuntu \
 --time-size=28 \
@@ -54,7 +54,7 @@ i3lock \
 --wrong-size=24 \
 --wrong-color=$FOREGROUND \
 \
---greeter-font='Ubuntu Bold'\
+--greeter-font='Ubuntu:style=Bold' \
 --greeter-size=24 \
 --greeter-color=$FOREGROUND \
 --greeteroutline-color=$BLACK \
