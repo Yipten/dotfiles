@@ -9,6 +9,10 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# TODO: maybe use Xorg config files instead?
+# set keyboard layout
+exec --no-startup-id setxkbmap -model pc105 -layout us,us -variant dvp, -option grp:alt_caps_toggle
+
 set $mod mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
