@@ -24,6 +24,9 @@ background='/tmp/screen.png'
 scrot $background
 convert $background -scale 10% -scale 1000% $background
 
+# add this line for fortunes
+#--greeter-text="$(fortune -s fortunes | tr '\n' ' ')" \
+
 # lock screen
 i3lock \
 --image=$background \
@@ -36,7 +39,6 @@ i3lock \
 --no-modkey-text \
 --lock-text="sorry, you're gonna have to wait" \
 --lockfailed-text='almost there...' \
---greeter-text="$(fortune -s fortunes | tr '\n' ' ')" \
 \
 --time-font=Ubuntu \
 --time-size=28 \
