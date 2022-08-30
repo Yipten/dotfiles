@@ -12,13 +12,13 @@ case $1 in
 		lock
 		;;
 	logout)
-		i3-msg exit
+		swaymsg exit
 		;;
 	suspend)
 		systemctl suspend
 		;;
 	hibernate)
-		sudo systemctl hibernate
+		systemctl hibernate
 		;;
 	reboot)
 		systemctl reboot
