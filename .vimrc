@@ -40,15 +40,15 @@ let &showbreak='↳ '
 " colors "
 """"""""""
 " inactive tabs
-highlight TabLine cterm=none ctermbg=black ctermfg=lightgray
+highlight TabLine cterm=none ctermbg=darkgray ctermfg=lightgray
 " active tab
 highlight TabLineSel cterm=bold ctermbg=none ctermfg=lightgray
 " remainder of tab line
-highlight TabLineFill cterm=bold ctermbg=black
+highlight TabLineFill cterm=bold ctermbg=darkgray
 " focused window status line
-highlight StatusLine cterm=bold ctermbg=black ctermfg=lightgray
+highlight StatusLine cterm=bold ctermbg=darkgray ctermfg=lightgray
 " unfocused window status line
-highlight StatusLineNC cterm=bold ctermbg=black ctermfg=lightgray
+highlight StatusLineNC cterm=bold ctermbg=darkgray ctermfg=lightgray
 " focused terminal status line
 highlight StatusLineTerm cterm=bold ctermbg=darkgreen ctermfg=black
 " unfocused terminal status line
