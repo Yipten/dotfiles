@@ -126,6 +126,12 @@ input '1739:30961:Synaptics_TM3096-001' {
 input '3823:49229:eGalax_Inc._eGalaxTouch_EXC3000-0367-44.00.00' {
     events disabled
 }
+#
+# Wireless mouse
+#
+input '1578:22808:MOSART_Semi._2.4G_Keyboard_Mouse' {
+    scroll_factor 0.7
+}
 
 ### Key bindings
 #
