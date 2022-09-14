@@ -66,8 +66,8 @@ output * bg $wallpaper fill
 #
 # Displays
 #
-output eDP-1 resolution 1366x768 position 0,470
-output HDMI-A-1 resolution 1680x1050 position 1366,0
+output eDP-1 resolution 1366x768 position 0,0
+output HDMI-A-1 resolution 1680x1050 position 1366,-470
 
 ### Power configuration
 # lock screen just before suspending
@@ -143,7 +143,7 @@ input '1578:22808:MOSART_Semi._2.4G_Keyboard_Mouse' {
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec wofi --show drun
+    bindsym $mod+d exec wofi
     bindsym $mod+Shift+d exec wofi --show run
 
     # Drag floating windows by holding down $mod and left mouse button.
