@@ -55,6 +55,7 @@ gaps inner 20
 exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
 exec udiskie
+exec gammastep
 exec dunst
 exec nextcloud --background
 
@@ -160,10 +161,10 @@ input '1578:22808:MOSART_Semi._2.4G_Keyboard_Mouse' {
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
     # Brightness controls
-    #bindsym --locked Shift+XF86MonBrightnessDown exec brightnessctl set 1%-
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 1%-
-    #bindsym --locked Shift+XF86MonBrightnessUp exec brightnessctl set 1%+
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 1%- -n
+    bindsym --locked Shift+XF86MonBrightnessDown exec brightnessctl set 1
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 1%+
+    bindsym --locked Shift+XF86MonBrightnessUp exec brightnessctl set $(brightnessctl max)
 
     # Volume controls
     bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
