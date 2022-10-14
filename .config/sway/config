@@ -267,7 +267,7 @@ input '1578:22808:MOSART_Semi._2.4G_Keyboard_Mouse' {
     bindsym $mod+Ctrl+Shift+Plus move container to workspace $workspace9 ; workspace $workspace9
     bindsym $mod+Ctrl+Shift+BracketRight move container to workspace $workspace10 ; workspace $workspace10
 #
-# Layout stuff:
+# Layout stuff
 #
     # You can 'split' the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
@@ -292,7 +292,7 @@ input '1578:22808:MOSART_Semi._2.4G_Keyboard_Mouse' {
     # Move focus to the parent container
     bindsym $mod+a focus parent
 #
-# Scratchpad:
+# Scratchpad
 #
     # Sway has a 'scratchpad', which is a bag of holding for windows.
     # You can send windows there and get them back later.
@@ -304,7 +304,7 @@ input '1578:22808:MOSART_Semi._2.4G_Keyboard_Mouse' {
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 #
-# Resizing containers:
+# Resizing containers
 #
 mode 'resize' {
     # left will shrink the containers width
@@ -323,10 +323,25 @@ mode 'resize' {
     bindsym Right resize grow width 10px
 
     # Return to default mode
-    bindsym Return mode 'default'
     bindsym Escape mode 'default'
 }
 bindsym $mod+r mode 'resize'
+
+#
+# Notification management
+#
+mode 'notifications' {
+    # use up & down to go backwards & forwards in notification history
+    bindsym $up exec dunstctl history-pop
+    bindsym $down exec dunstctl close
+
+    bindsym Up exec dunstctl history-pop
+    bindsym Down exec dunstctl close
+
+    # close all notifications & return to default mode
+    bindsym Escape exec dunstctl close-all && swaymsg mode 'default'
+}
+bindsym $mod+n mode 'notifications'
 
 #
 # Status Bar
