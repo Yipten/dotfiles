@@ -1,0 +1,37 @@
+* {
+    background-color: transparent;
+    border: none;
+}
+#window {
+    background-color: rgba(34, 34, 34, 0.85);
+    padding: 10px;
+	border-radius: 10px;
+	width: 50%;
+}
+#outer-box {
+	padding: 10px;
+}
+#input {
+    padding: 10px;
+    box-shadow: none;
+}
+#scroll {
+	padding: 0px;
+}
+#inner-box {
+    padding: 0px;
+}
+#img {
+    padding-right: 5px;
+}
+#text {
+    color: #DDDDDD;
+}
+#entry {
+    padding: 10px;
+	border-radius: 10px;
+    outline: none;
+}
+#entry:selected {
+    background-color: rgba(0, 0, 0, 0.5);
+}
