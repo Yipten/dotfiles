@@ -58,6 +58,7 @@ exec udiskie
 exec gammastep
 exec dunst
 exec nextcloud --background
+exec playerctld daemon
 
 ### Output configuration
 #
