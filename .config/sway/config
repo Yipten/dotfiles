@@ -183,9 +183,11 @@ input '1578:22808:MOSART_Semi._2.4G_Keyboard_Mouse' {
     bindsym Print exec grim - | wl-copy
     bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy
 
-    # Firefox
+    # Internet browsers
     bindsym XF86Search exec firefox
-    bindsym Shift+XF86Search exec chromium
+    bindsym Shift+XF86Search exec firefox --private-window
+    bindsym Ctrl+XF86Search exec chromium
+    bindsym Ctrl+Shift+XF86Search exec chromium --incognito
 #
 # Moving around
 #
