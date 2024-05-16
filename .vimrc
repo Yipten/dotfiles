@@ -18,7 +18,7 @@ set shiftround
 " tabs are spaces
 set expandtab
 " maximum number of characters per line
-set textwidth=80
+set textwidth=0
 
 """"""""""""""
 " appearance "
@@ -86,4 +86,5 @@ set wildmenu
 " prevent lag when using O
 set timeoutlen=3000
 set ttimeoutlen=100
-
+" make backspace key work
+set backspace=indent,eol,start
