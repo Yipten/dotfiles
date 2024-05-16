@@ -1,8 +1,4 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+# Sway configuration (~/.config/sway/config)
 
 ### Variables
 # Logo key. Use Mod1 for Alt.
@@ -39,11 +35,11 @@ set $color_accent_0_dark	#114941
 set $color_accent_0_light	#6FA69E
 set $color_accent_1			#449F4F
 set $color_accent_2			#87CF3E
-#						border				background			text		indicator			child_border
-client.focused			$color_bg			$color_bg			$color_fg	$color_accent_0		$color_bg
-client.unfocused		$color_bg			$color_bg			$color_gray	$color_bg   		$color_bg
-client.focused_inactive	$color_bg			$color_bg			$color_gray	$color_bg   		$color_bg
-client.urgent			$color_accent_2		$color_accent_2		$color_bg	$color_bg   		$color_bg
+#						border				background			    text		indicator			child_border
+client.focused			$color_bg			$color_accent_0_dark	$color_fg	$color_accent_0		$color_bg
+client.unfocused		$color_bg			$color_bg			    $color_gray	$color_bg   		$color_bg
+client.focused_inactive	$color_bg			$color_bg			    $color_gray	$color_bg   		$color_bg
+client.urgent			$color_accent_2		$color_accent_2		    $color_bg	$color_bg   		$color_bg
 #
 # Borders & gaps
 #
@@ -59,6 +55,7 @@ exec gammastep
 exec dunst
 exec nextcloud --background
 exec playerctld daemon
+exec spotblock
 
 ### Output configuration
 #
@@ -68,8 +65,14 @@ output * bg $wallpaper fill
 #
 # Displays
 #
-output eDP-1 resolution 1366x768 position 0,0
-output HDMI-A-1 resolution 1680x1050 position 1366,-470
+# laptop
+#output eDP-1 resolution 1366x768 position 0,0
+output eDP-1 resolution 1366x768 position 0,470
+# Dell monitor
+#output 'Dell Inc. DELL E2209W H095G8C10BCM' resolution 1680x1050 position 1366,-470
+output 'Dell Inc. DELL E2209W H095G8C10BCM' resolution 1680x1050 position 1366,0
+# Insignia TV
+# TODO
 
 ### Power configuration
 # lock screen just before suspending
@@ -99,8 +102,8 @@ mode $power_management {
 #
 # TODO: specifying the keyboard prevents Firefox from crashing, but makes
 # precise brightness controls not work. Hmm...
-input '1:1:AT_Translated_Set_2_keyboard' {
-#input type:keyboard {
+#input '1:1:AT_Translated_Set_2_keyboard' {
+input type:keyboard {
     xkb_layout 'us,us'
     xkb_variant 'dvp,'
     xkb_options 'grp:alt_caps_toggle'
@@ -115,8 +118,8 @@ input '1739:30961:Synaptics_TM3096-001' {
     drag enabled
     dwt enabled
     natural_scroll enabled
-    pointer_accel 0
-    scroll_factor 1
+    pointer_accel 0.0
+    scroll_factor 0.5
     scroll_method two_finger
     tap enabled
     tap_button_map lrm
@@ -130,183 +133,188 @@ input '3823:49229:eGalax_Inc._eGalaxTouch_EXC3000-0367-44.00.00' {
 #
 # Wireless mouse
 #
-input '1578:22808:MOSART_Semi._2.4G_Keyboard_Mouse' {
+#input '1578:22808:MOSART_Semi._2.4G_Keyboard_Mouse' {
+input type:pointer {
+    accel_profile adaptive
     scroll_factor 1.0
+    pointer_accel 0.0
 }
 
 ### Key bindings
 #
 # Basics
 #
-    # Start a terminal
-    bindsym $mod+Return exec $term
+# Start a terminal
+bindsym $mod+Return exec $term
 
-    # Kill focused window
-    bindsym $mod+Shift+q kill
+# Kill focused window
+bindsym $mod+Shift+q kill
 
-    # Start your launcher
-    bindsym $mod+d exec wofi
-    bindsym $mod+Shift+d exec wofi --show run
+# Start your launcher
+bindsym $mod+d exec wofi
+bindsym $mod+Shift+d exec wofi --show run
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
 
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
+# Reload the configuration file
+bindsym $mod+Shift+c reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
-    # Brightness controls
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 1%- -n
-    bindsym --locked Shift+XF86MonBrightnessDown exec brightnessctl set 1
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 1%+
-    bindsym --locked Shift+XF86MonBrightnessUp exec brightnessctl set $(brightnessctl max)
+# Brightness controls
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 1%- -n
+#bindsym --locked Shift+XF86MonBrightnessDown exec brightnessctl set 1
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 1%+
+#bindsym --locked Shift+XF86MonBrightnessUp exec brightnessctl set $(brightnessctl max)
+bindsym --locked $mod+Shift+b exec brightnessctl set 0
+bindsym --locked $mod+Shift+Ctrl+b exec brightnessctl set $(brightnessctl max)
 
-    # Volume controls
-    bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-    bindsym --locked Shift+XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-
-    bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-    bindsym --locked Shift+XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+
-    bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+# Volume controls
+bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym --locked Shift+XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-
+bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym --locked Shift+XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+
+bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
 
-    # Media controls
-    bindsym --locked XF86AudioPrev exec playerctl previous
-    bindsym --locked XF86AudioNext exec playerctl next
-    bindsym --locked XF86AudioPlay exec playerctl play-pause
+# Media controls
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPlay exec playerctl play-pause
 
-    # Screenshot controls
-    bindsym Print exec grim - | wl-copy
-    bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy
+# Screenshot controls
+bindsym Print exec grim - | wl-copy
+bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy
 
-    # Internet browsers
-    bindsym XF86Search exec firefox
-    bindsym Shift+XF86Search exec firefox --private-window
-    bindsym Ctrl+XF86Search exec chromium
-    bindsym Ctrl+Shift+XF86Search exec chromium --incognito
+# Internet browsers
+bindsym XF86Search exec firefox
+bindsym Shift+XF86Search exec firefox --private-window
+bindsym Ctrl+XF86Search exec chromium
+bindsym Ctrl+Shift+XF86Search exec chromium --incognito
 #
 # Moving around
 #
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
-    # Move focused workspace to different display
-    bindsym $mod+Ctrl+$left move workspace to output left
-    bindsym $mod+Ctrl+$down move workspace to output down
-    bindsym $mod+Ctrl+$up move workspace to output up
-    bindsym $mod+Ctrl+$right move workspace to output right
-    # Ditto, with arrow keys
-    bindsym $mod+Ctrl+Left move workspace to output left
-    bindsym $mod+Ctrl+Down move workspace to output down
-    bindsym $mod+Ctrl+Up move workspace to output up
-    bindsym $mod+Ctrl+Right move workspace to output right
+# Move focused workspace to different display
+bindsym $mod+Ctrl+$left move workspace to output left
+bindsym $mod+Ctrl+$down move workspace to output down
+bindsym $mod+Ctrl+$up move workspace to output up
+bindsym $mod+Ctrl+$right move workspace to output right
+# Ditto, with arrow keys
+bindsym $mod+Ctrl+Left move workspace to output left
+bindsym $mod+Ctrl+Down move workspace to output down
+bindsym $mod+Ctrl+Up move workspace to output up
+bindsym $mod+Ctrl+Right move workspace to output right
 #
 # Workspaces
 #
-    # Workspace names
-    set $workspace1 '1: Hack'
-    set $workspace2 '2: Email'
-    set $workspace3 '3: Talk'
-    set $workspace4 '4: Internet'
-    set $workspace5 '5: Internet++'
-    set $workspace6 '6: Internet#'
-    set $workspace7 '7:Seven'
-    set $workspace8 '8:Eight'
-    set $workspace9 '9:Nine'
-    set $workspace10 '10: Media'
-    # Switch to workspace
-    bindsym $mod+Ampersand workspace $workspace1
-    bindsym $mod+BracketLeft workspace $workspace2
-    bindsym $mod+BraceLeft workspace $workspace3
-    bindsym $mod+BraceRight workspace $workspace4
-    bindsym $mod+ParenLeft workspace $workspace5
-    bindsym $mod+Equal workspace $workspace6
-    bindsym $mod+Asterisk workspace $workspace7
-    bindsym $mod+ParenRight workspace $workspace8
-    bindsym $mod+Plus workspace $workspace9
-    bindsym $mod+BracketRight workspace $workspace10
-    # Move focused container to workspace
-    bindsym $mod+Shift+Ampersand move container to workspace $workspace1
-    bindsym $mod+Shift+BracketLeft move container to workspace $workspace2
-    bindsym $mod+Shift+BraceLeft move container to workspace $workspace3
-    bindsym $mod+Shift+BraceRight move container to workspace $workspace4
-    bindsym $mod+Shift+ParenLeft move container to workspace $workspace5
-    bindsym $mod+Shift+Equal move container to workspace $workspace6
-    bindsym $mod+Shift+Asterisk move container to workspace $workspace7
-    bindsym $mod+Shift+ParenRight move container to workspace $workspace8
-    bindsym $mod+Shift+Plus move container to workspace $workspace9
-    bindsym $mod+Shift+BracketRight move container to workspace $workspace10
-    # Move focused container to workspace and switch to that workspace
-    bindsym $mod+Ctrl+Shift+Ampersand move container to workspace $workspace1 ; workspace $workspace1
-    bindsym $mod+Ctrl+Shift+BracketLeft move container to workspace $workspace2 ; workspace $workspace2
-    bindsym $mod+Ctrl+Shift+BraceLeft move container to workspace $workspace3 ; workspace $workspace3
-    bindsym $mod+Ctrl+Shift+BraceRight move container to workspace $workspace4 ; workspace $workspace4
-    bindsym $mod+Ctrl+Shift+ParenLeft move container to workspace $workspace5 ; workspace $workspace5
-    bindsym $mod+Ctrl+Shift+Equal move container to workspace $workspace6 ; workspace $workspace6
-    bindsym $mod+Ctrl+Shift+Asterisk move container to workspace $workspace7 ; workspace $workspace7
-    bindsym $mod+Ctrl+Shift+ParenRight move container to workspace $workspace8 ; workspace $workspace8
-    bindsym $mod+Ctrl+Shift+Plus move container to workspace $workspace9 ; workspace $workspace9
-    bindsym $mod+Ctrl+Shift+BracketRight move container to workspace $workspace10 ; workspace $workspace10
+# Workspace names
+set $workspace1 '1: Hack'
+set $workspace2 '2: Email'
+set $workspace3 '3: Talk'
+set $workspace4 '4: Internet'
+set $workspace5 '5: Internet++'
+set $workspace6 '6: Internet#'
+set $workspace7 '7:Seven'
+set $workspace8 '8:Eight'
+set $workspace9 '9:Nine'
+set $workspace10 '10: Media'
+# Switch to workspace
+bindsym $mod+Ampersand workspace $workspace1
+bindsym $mod+BracketLeft workspace $workspace2
+bindsym $mod+BraceLeft workspace $workspace3
+bindsym $mod+BraceRight workspace $workspace4
+bindsym $mod+ParenLeft workspace $workspace5
+bindsym $mod+Equal workspace $workspace6
+bindsym $mod+Asterisk workspace $workspace7
+bindsym $mod+ParenRight workspace $workspace8
+bindsym $mod+Plus workspace $workspace9
+bindsym $mod+BracketRight workspace $workspace10
+# Move focused container to workspace
+bindsym $mod+Shift+Ampersand move container to workspace $workspace1
+bindsym $mod+Shift+BracketLeft move container to workspace $workspace2
+bindsym $mod+Shift+BraceLeft move container to workspace $workspace3
+bindsym $mod+Shift+BraceRight move container to workspace $workspace4
+bindsym $mod+Shift+ParenLeft move container to workspace $workspace5
+bindsym $mod+Shift+Equal move container to workspace $workspace6
+bindsym $mod+Shift+Asterisk move container to workspace $workspace7
+bindsym $mod+Shift+ParenRight move container to workspace $workspace8
+bindsym $mod+Shift+Plus move container to workspace $workspace9
+bindsym $mod+Shift+BracketRight move container to workspace $workspace10
+# Move focused container to workspace and switch to that workspace
+bindsym $mod+Ctrl+Shift+Ampersand move container to workspace $workspace1 ; workspace $workspace1
+bindsym $mod+Ctrl+Shift+BracketLeft move container to workspace $workspace2 ; workspace $workspace2
+bindsym $mod+Ctrl+Shift+BraceLeft move container to workspace $workspace3 ; workspace $workspace3
+bindsym $mod+Ctrl+Shift+BraceRight move container to workspace $workspace4 ; workspace $workspace4
+bindsym $mod+Ctrl+Shift+ParenLeft move container to workspace $workspace5 ; workspace $workspace5
+bindsym $mod+Ctrl+Shift+Equal move container to workspace $workspace6 ; workspace $workspace6
+bindsym $mod+Ctrl+Shift+Asterisk move container to workspace $workspace7 ; workspace $workspace7
+bindsym $mod+Ctrl+Shift+ParenRight move container to workspace $workspace8 ; workspace $workspace8
+bindsym $mod+Ctrl+Shift+Plus move container to workspace $workspace9 ; workspace $workspace9
+bindsym $mod+Ctrl+Shift+BracketRight move container to workspace $workspace10 ; workspace $workspace10
 #
 # Layout stuff
 #
-    # You can 'split' the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+# You can 'split' the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b splith
+bindsym $mod+v splitv
 
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 
-    # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
 
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
 
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
+# Move focus to the parent container
+bindsym $mod+a focus parent
 #
 # Scratchpad
 #
-    # Sway has a 'scratchpad', which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+# Sway has a 'scratchpad', which is a bag of holding for windows.
+# You can send windows there and get them back later.
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
 
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
 #
 # Resizing containers
 #
