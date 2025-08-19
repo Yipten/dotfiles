@@ -15,7 +15,7 @@ case $1 in
 		swaymsg exit
 		;;
 	suspend)
-		systemctl suspend
+		systemctl suspend-then-hibernate
 		;;
 	hibernate)
 		systemctl hibernate
