@@ -65,9 +65,10 @@ output * bg $wallpaper fill
 #
 # Displays
 #
+# TODO: make it so this doesn't have to be switched back and forth for different programs
 # laptop
-#output eDP-1 resolution 1366x768 position 0,0
-output eDP-1 resolution 1366x768 position 0,470
+output eDP-1 resolution 1366x768 position 0,0
+#output eDP-1 resolution 1366x768 position 0,470
 # Dell monitor
 #output 'Dell Inc. DELL E2209W H095G8C10BCM' resolution 1680x1050 position 1366,-470
 output 'Dell Inc. DELL E2209W H095G8C10BCM' resolution 1680x1050 position 1366,0
@@ -100,22 +101,20 @@ mode $power_management {
 #
 # Keyboard
 #
-# TODO: specifying the keyboard prevents Firefox from crashing, but makes
-# precise brightness controls not work. Hmm...
-#input '1:1:AT_Translated_Set_2_keyboard' {
 input type:keyboard {
     xkb_layout 'us,us'
-    xkb_variant 'dvp,'
+    xkb_variant 'dvorak,'
     xkb_options 'grp:alt_caps_toggle'
     xkb_numlock enable
 }
 #
 # Touchpad
 #
-input '1739:30961:Synaptics_TM3096-001' {
+input type:touchpad {
     accel_profile adaptive
     click_method button_areas
     drag enabled
+    drag_lock enabled
     dwt enabled
     natural_scroll enabled
     pointer_accel 0.0
@@ -127,13 +126,12 @@ input '1739:30961:Synaptics_TM3096-001' {
 #
 # Touchscreen
 #
-input '3823:49229:eGalax_Inc._eGalaxTouch_EXC3000-0367-44.00.00' {
+input type:touch {
     events disabled
 }
 #
 # Wireless mouse
 #
-#input '1578:22808:MOSART_Semi._2.4G_Keyboard_Mouse' {
 input type:pointer {
     accel_profile adaptive
     scroll_factor 1.0
@@ -169,11 +167,11 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
 
 # Brightness controls
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 1%- -n
-#bindsym --locked Shift+XF86MonBrightnessDown exec brightnessctl set 1
+bindsym --locked Shift+XF86MonBrightnessDown exec brightnessctl set 0
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 1%+
-#bindsym --locked Shift+XF86MonBrightnessUp exec brightnessctl set $(brightnessctl max)
-bindsym --locked $mod+Shift+b exec brightnessctl set 0
-bindsym --locked $mod+Shift+Ctrl+b exec brightnessctl set $(brightnessctl max)
+bindsym --locked Shift+XF86MonBrightnessUp exec brightnessctl set $(brightnessctl max)
+#bindsym --locked $mod+Shift+b exec brightnessctl set 0
+#bindsym --locked $mod+Shift+Ctrl+b exec brightnessctl set $(brightnessctl max)
 
 # Volume controls
 bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
@@ -246,38 +244,38 @@ set $workspace8 '8:Eight'
 set $workspace9 '9:Nine'
 set $workspace10 '10: Media'
 # Switch to workspace
-bindsym $mod+Ampersand workspace $workspace1
-bindsym $mod+BracketLeft workspace $workspace2
-bindsym $mod+BraceLeft workspace $workspace3
-bindsym $mod+BraceRight workspace $workspace4
-bindsym $mod+ParenLeft workspace $workspace5
-bindsym $mod+Equal workspace $workspace6
-bindsym $mod+Asterisk workspace $workspace7
-bindsym $mod+ParenRight workspace $workspace8
-bindsym $mod+Plus workspace $workspace9
-bindsym $mod+BracketRight workspace $workspace10
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
 # Move focused container to workspace
-bindsym $mod+Shift+Ampersand move container to workspace $workspace1
-bindsym $mod+Shift+BracketLeft move container to workspace $workspace2
-bindsym $mod+Shift+BraceLeft move container to workspace $workspace3
-bindsym $mod+Shift+BraceRight move container to workspace $workspace4
-bindsym $mod+Shift+ParenLeft move container to workspace $workspace5
-bindsym $mod+Shift+Equal move container to workspace $workspace6
-bindsym $mod+Shift+Asterisk move container to workspace $workspace7
-bindsym $mod+Shift+ParenRight move container to workspace $workspace8
-bindsym $mod+Shift+Plus move container to workspace $workspace9
-bindsym $mod+Shift+BracketRight move container to workspace $workspace10
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
 # Move focused container to workspace and switch to that workspace
-bindsym $mod+Ctrl+Shift+Ampersand move container to workspace $workspace1 ; workspace $workspace1
-bindsym $mod+Ctrl+Shift+BracketLeft move container to workspace $workspace2 ; workspace $workspace2
-bindsym $mod+Ctrl+Shift+BraceLeft move container to workspace $workspace3 ; workspace $workspace3
-bindsym $mod+Ctrl+Shift+BraceRight move container to workspace $workspace4 ; workspace $workspace4
-bindsym $mod+Ctrl+Shift+ParenLeft move container to workspace $workspace5 ; workspace $workspace5
-bindsym $mod+Ctrl+Shift+Equal move container to workspace $workspace6 ; workspace $workspace6
-bindsym $mod+Ctrl+Shift+Asterisk move container to workspace $workspace7 ; workspace $workspace7
-bindsym $mod+Ctrl+Shift+ParenRight move container to workspace $workspace8 ; workspace $workspace8
-bindsym $mod+Ctrl+Shift+Plus move container to workspace $workspace9 ; workspace $workspace9
-bindsym $mod+Ctrl+Shift+BracketRight move container to workspace $workspace10 ; workspace $workspace10
+bindsym $mod+Ctrl+Shift+1 move container to workspace $workspace1 ; workspace $workspace1
+bindsym $mod+Ctrl+Shift+2 move container to workspace $workspace2 ; workspace $workspace2
+bindsym $mod+Ctrl+Shift+3 move container to workspace $workspace3 ; workspace $workspace3
+bindsym $mod+Ctrl+Shift+4 move container to workspace $workspace4 ; workspace $workspace4
+bindsym $mod+Ctrl+Shift+5 move container to workspace $workspace5 ; workspace $workspace5
+bindsym $mod+Ctrl+Shift+6 move container to workspace $workspace6 ; workspace $workspace6
+bindsym $mod+Ctrl+Shift+7 move container to workspace $workspace7 ; workspace $workspace7
+bindsym $mod+Ctrl+Shift+8 move container to workspace $workspace8 ; workspace $workspace8
+bindsym $mod+Ctrl+Shift+9 move container to workspace $workspace9 ; workspace $workspace9
+bindsym $mod+Ctrl+Shift+0 move container to workspace $workspace10 ; workspace $workspace10
 #
 # Layout stuff
 #
@@ -349,6 +347,9 @@ mode 'notifications' {
 
     bindsym Up exec dunstctl history-pop
     bindsym Down exec dunstctl close
+
+    # TODO: "do not disturb" mode
+    #bindsym n exec $HOME/scripts/toggle_dnd.sh
 
     # close all notifications & return to default mode
     bindsym Escape exec dunstctl close-all && swaymsg mode 'default'
